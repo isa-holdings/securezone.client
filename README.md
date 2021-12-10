@@ -1,4 +1,4 @@
-# Secure ZOne
+# Secure Zone
 
 This project uses the following technologies, Where the technologies are described further down this file, they are marked like this
 
