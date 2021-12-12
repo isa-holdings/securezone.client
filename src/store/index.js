@@ -16,17 +16,17 @@ export default store(function (/* { ssrContext } */) {
   const Store = createStore({
     state: {
       authenticated: false,
-      authentication404Msg: "api.securezone.co.za returned invalid request data, please try again"
+      authentication404Msg: 'api.securezone.co.za returned invalid request data, please try again'
     },
     mutations: {
-        /**
-         *
-         * @param state state
-         * @param status authenticated: boolean
-         */
-        setAuthentication(state,status) {
-            state.authenticated = status;
-        }
+      /**
+       *
+       * @param state state
+       * @param status authenticated: boolean
+       */
+      setAuthentication (state, status) {
+        state.authenticated = status
+      }
     },
     // enable strict mode (adds overhead!)
     // for dev mode and --debug builds only

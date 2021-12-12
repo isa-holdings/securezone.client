@@ -47,9 +47,15 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
+import { useStore } from 'vuex'
 import TodoAddListButton from 'components/TodoAddListButton.vue'
 import TodoListsList from 'components/TodoListsList.vue'
 export default defineComponent({
+  preFetch ({ store, redirect }) {
+    if (!store.state.authenticated) {
+      redirect({ path: '/auth/login' })
+    }
+  },
   name: 'MainLayout',
 
   components: {
