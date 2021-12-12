@@ -47,6 +47,8 @@ module.exports = configure(function (ctx) {
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
       vueRouterMode: 'history', // available values: 'hash', 'history'
+      distDir: process.env.WEB_BUILD_DIR,
+      showProgress: process.env.WEB_BUILD_SHOW_PROGRESS,
 
       // transpile: false,
       // publicPath: '/',
@@ -142,9 +144,9 @@ module.exports = configure(function (ctx) {
       },
 
       manifest: {
-        name: 'Quasar Todo',
-        short_name: 'Quasar Todo',
-        description: 'A todo app',
+        name: 'Secure Zone',
+        short_name: 'Secure ZOne',
+        description: 'App by ISA',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
@@ -209,7 +211,7 @@ module.exports = configure(function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'quasar-todo'
+        appId: 'secureZone'
       },
 
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
@@ -222,6 +224,23 @@ module.exports = configure(function (ctx) {
       chainWebpackPreload (chain) {
         chain.plugin('eslint-webpack-plugin')
           .use(ESLintPlugin, [{ extensions: ['js'] }])
+      },
+      chainWebpack (chain, { isServer, isClient }) {
+        chain.module.rule('vue')
+          .use('vue-loader')
+          .loader('vue-loader')
+          .tap(options => {
+            options.transpileOptions = {
+              transforms: {
+                dangerousTaggedTemplateString: true
+              }
+            }
+            return options
+          })
+        // chain.module.rule('gql')
+        //   .test(/\.(graphql|gql)$/)
+        //   .use('graphql-tag/loader')
+        //   .loader('graphql-tag/loader')
       }
     }
   }
