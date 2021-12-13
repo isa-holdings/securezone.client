@@ -32,9 +32,9 @@
 
             <q-checkbox :model-value="true" label="Remember Me"/>
 
-            <q-btn 
-              label="Login" 
-              class="full-width" 
+            <q-btn
+              label="Login"
+              class="full-width"
               color="primary"
               @click="LoginButtonClicked"/>
             <div class="q-mt-sm">
@@ -77,18 +77,16 @@ export default {
   methods: {
     LoginButtonClicked () {
       Loading.show({
-        spinner: QSpinnerGears,
+        spinner: QSpinnerGears
         // other props
       })
       setTimeout(() => {
         this.$q.dialog({
           title: 'Login Failed',
-          message: "api.securezone.co.za timed out, please try again later"
-        });
-        Loading.hide();
-      },30000);
-      
-      
+          message: 'api.securezone.co.za timed out, please try again later'
+        })
+        Loading.hide()
+      }, 30000)
     }
   },
   actions: {
