@@ -32,13 +32,11 @@
                             class="q-mb-sm"
                             v-model="password"/>
 
-                        <q-checkbox :model-value="true" label="Remember Me"/>
-
                         <q-btn
                             label="Login"
                             class="full-width"
                             color="primary"
-                            @click="LoginButtonClicked"/>
+                            @click=""/>
                         <div class="q-mt-sm">
                             <router-link to="/auth/forgot-password">> Forgot password?</router-link>
                         </div>
@@ -76,18 +74,33 @@ import { inject } from 'vue'
 
 export default {
     name: 'login',
+    setup() {
+        const store = inject('store')
+
+        let loginForm = reactive({
+            email: '',
+            password: ''
+        })
+
+        let loginFormValid = computed(() => {
+            if (loginForm.email && loginForm.password) {
+                return true;
+            }
+        })
+
+        return {
+            store,
+            loginForm,
+            loginFormValid
+        }
+    },
     data() {
         return {
             email: '',
             password: ''
         }
     },
-    setup() {
-        const store = inject('store')
-        return {
-            store
-        }
-    },
+    
     methods: {
         login() {
 
