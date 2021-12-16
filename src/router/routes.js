@@ -2,12 +2,12 @@
 const routes = [
   {
     path: '/',
-    redirect: '/auth/login',
-    //component: () => import('pages/LoginPage.vue'),
+    redirect: '/auth/login'
+    // component: () => import('pages/LoginPage.vue'),
     // component: () => import('layouts/MainLayout.vue'),
-    //children: [
+    // children: [
     //  { path: '', component: () => import('pages/Index.vue') }
-    //]
+    // ]
   },
   {
     path: '/auth',

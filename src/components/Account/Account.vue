@@ -10,17 +10,23 @@ export default defineComponent({
     setup() {
         const store = inject('store')
 
+        // According to the state of the user-account `authenticated` I either load the login page or the user account page
         let page = computed(() => {
             if (store.account.state.authenticated) {
-                return 'account-my-account'
+                return 'account-profile'
             }
             return 'account-login'
         })
+
         return {
             store,
-            page
+            page 
         }
     },
+    components: {
+        'account-login': require('components/Account/Login').default,
+        'account-profile': require('components/Account/Profile').default
+    }
 
 })
 </script>
