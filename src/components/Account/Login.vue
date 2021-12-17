@@ -67,10 +67,8 @@ html, body {
 </style>
 
 <script>
-import { getClientOptions } from 'src/apollo'
 import { Loading, QSpinnerGears } from 'quasar'
-import { gql } from "graphql-tag"
-import { inject } from 'vue'
+import {computed, inject, reactive} from 'vue'
 
 export default {
     name: 'login',
@@ -100,7 +98,7 @@ export default {
             password: ''
         }
     },
-    
+
     methods: {
         login() {
 

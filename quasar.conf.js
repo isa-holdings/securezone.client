@@ -73,21 +73,6 @@ module.exports = configure(function (ctx) {
             chainWebpack(chain) {
                 // chain.plugin('eslint-webpack-plugin')
                 //   .use(ESLintPlugin, [{ extensions: ['js', 'vue'] }])
-                chain.module.rule('vue')
-                    .use('vue-loader')
-                    .loader('vue-loader')
-                    .tap(options => {
-                        options.transpileOptions = {
-                            transforms: {
-                                dangerousTaggedTemplateString: true
-                            }
-                        }
-                        return options
-                    });
-                chain.module.rule('gql')
-                    .test(/\.(graphql|gql)$/)
-                    .use('graphql-tag/loader')
-                    .loader('graphql-tag/loader')
             },
 
         },
