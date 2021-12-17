@@ -1,7 +1,16 @@
-import account from './modules/store-account'
+import Vue from 'vue'
+import Vuex from 'vuex'
 
-const store = {
-  account
-}
+import app from './app'
+import session from './session'
 
-export default store;
+Vue.use(Vuex)
+
+const store = new Vuex.Store({
+  modules: {
+    app,
+    session
+  }
+})
+
+export default store
