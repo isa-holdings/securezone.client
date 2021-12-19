@@ -36,7 +36,7 @@
                             label="Login"
                             class="full-width"
                             color="primary"
-                            @click=""/>
+                            @click="login()"/>
                         <div class="q-mt-sm">
                             <router-link to="/auth/forgot-password">> Forgot password?</router-link>
                         </div>
@@ -101,13 +101,14 @@ export default {
 
     methods: {
         login() {
-
-        },
-        LoginButtonClicked() {
             Loading.show({
                 spinner: QSpinnerGears,
                 // other props
             })
+
+        },
+        LoginButtonClicked() {
+            
             setTimeout(() => {
                 this.$q.dialog({
                     title: 'Login Failed',
