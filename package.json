@@ -12,8 +12,10 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
-    "core-js": "^3.6.5",
-    "quasar": "^2.0.0"
+    "core-js": "^3.20.0",
+    "json-to-graphql-query": "^2.1.0",
+    "quasar": "^2.0.0",
+    "typescript": "^4.5.4"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.13.14",
@@ -26,7 +28,8 @@
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-vue": "^7.0.0",
     "eslint-webpack-plugin": "^2.4.0",
-    "graphql-tag": "^2.12.6",
+    "vue-loader": "^16.8.3",
+    "vue-template-compiler": "^2.6.14",
     "workbox-webpack-plugin": "^6.0.0"
   },
   "browserslist": [
