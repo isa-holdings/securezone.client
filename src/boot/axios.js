@@ -1,24 +1,90 @@
 import { boot } from 'quasar/wrappers'
 import axios from 'axios'
 
-// Be careful when using SSR for cross-request state pollution
-// due to creating a Singleton instance here;
-// If any client changes this (global) instance, it might be a
-// good idea to move this instance creation inside of the
-// "export default () => {}" function below (which runs individually
-// for each client)
-const api = axios.create({ baseURL: 'https://api.example.com' })
+const token = sessionStorage.getItem('secZone_API_TOKEN');
 
-export default boot(({ app }) => {
-  // for use inside Vue files (Options API) through this.$axios and this.$api
+let head = {
+    'Accept': 'application/json'
+};
 
-  app.config.globalProperties.$axios = axios
-  // ^ ^ ^ this will allow you to use this.$axios (for Vue Options API form)
-  //       so you won't necessarily have to import axios in each vue file
+if (token) head['Authorization'] = `bearer ${token}`
 
-  app.config.globalProperties.$api = api
-  // ^ ^ ^ this will allow you to use this.$api (for Vue Options API form)
-  //       so you can easily perform requests against your app's API
+const api = axios.create({
+    method: 'POST',
+    baseURL: process.env.GRAPHQL_URI || '//api.securezone.co.za.test/gql',
+    headers: {
+
+    }
 })
 
-export { api }
+axios.interceptors.request.use(request => {
+    if (process.env.DEBUG_AXIOS) console.log(request);
+    // Edit request config
+    return request;
+}, error => {
+    if (process.env.DEBUG_AXIOS) console.log(error);
+    return Promise.reject(error);
+});
+
+axios.interceptors.response.use(response => {
+    if (process.env.DEBUG_AXIOS) console.log(response);
+    // Edit response config
+    return response;
+}, error => {
+    if (process.env.DEBUG_AXIOS) console.log(error);
+    return Promise.reject(error);
+});
+
+const useFetch = (url, config) = {}) => {
+    const data = ref(null)
+    const response = ref(null)
+    const error = ref(null)
+    const loading = ref(false)
+
+    const fetch = async () => {
+        loading.value = true;
+        try {
+            const result = await axios.request({
+                url,
+                ...config
+            })
+            response.value = result
+            data.value = result.data
+        } catch (ex) {
+            error.value = ex;
+        } finally {
+            loading.value = false;
+        }
+    }
+    !config.skip && fetch(); // if config skip is set we can fetch the data manually
+    return { response, error, data, loading, fetch }
+}
+
+
+
+
+// for use inside Vue files through this.$axios and this.$api
+// (only in Vue Options API form)
+export default boot(({ app }) => {
+    // for use inside Vue files (Options API) through this.$axios and this.$api
+    app.config.globalProperties.$axios = axios
+    // ^ ^ ^ this will allow you to use this.$axios (for Vue Options API form)
+    //       so you won't necessarily have to import axios in each vue file
+
+    app.config.globalProperties.$api = api
+    // ^ ^ ^ this will allow you to use this.$api (for Vue Options API form)
+    //       so you can easily perform requests against your app's API
+});
+
+// Here we define a named export
+// that we can later use inside .js files:
+export { axios, api }
+
+/** 
+In any JavaScript file, you’ll be able to import the axios instance like this.
+
+  // we import one of the named exports from src/boot/axios.js
+  import { api } from 'boot/axios'
+*/
+
+
