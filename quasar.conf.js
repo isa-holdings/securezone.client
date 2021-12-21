@@ -1,14 +1,8 @@
-/*
- * This file runs in a Node context (it's NOT transpiled by Babel), so use only
- * the ES6 features that are supported by your Node version. https://node.green/
- */
-
-// Configuration for your app
-// https://quasar.dev/quasar-cli/quasar-conf-js
-
 /* eslint-env node */
 const ESLintPlugin = require('eslint-webpack-plugin')
 const { configure } = require('quasar/wrappers')
+import LogRocket from 'logrocket';
+LogRocket.init('0wdhaj/securezone');
 
 module.exports = configure(function (ctx) {
     return {
@@ -22,10 +16,14 @@ module.exports = configure(function (ctx) {
         // --> boot files are part of "main.js"
         // https://quasar.dev/quasar-cli/boot-files
         boot: [
-            'axios',
-            'apollo',
-            'store'
-
+            'helpers',
+            'store',
+            'guardRoutes',
+            'jsonToGraph',
+            'make',
+            'uuid',
+            'vueWebStorage',
+            'axios'
         ],
 
         // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -35,16 +33,8 @@ module.exports = configure(function (ctx) {
 
         // https://github.com/quasarframework/quasar/tree/dev/extras
         extras: [
-            // 'ionicons-v4',
             'mdi-v5',
-            // 'fontawesome-v5',
-            // 'eva-icons',
-            // 'themify',
-            // 'line-awesome',
-            // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
-
             'roboto-font' // optional, you are not bound to it
-            // 'material-icons' // optional, you are not bound to it
         ],
 
         // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
@@ -84,7 +74,6 @@ module.exports = configure(function (ctx) {
                         }
                         return options
                     })
-
                 chain.module.rule('gql')
                     .test(/\.(graphql|gql)$/)
                     .use('graphql-tag/loader')

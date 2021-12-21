@@ -4548,6 +4548,11 @@
     "slice-ansi" "^4.0.0"
     "wrap-ansi" "^6.2.0"
 
+"logrocket@^2.1.2":
+  "integrity" "sha512-voHZcZYtXIh0oIT6I/9szdDSauKR98uGlVxovD6oIggm7nqdic5d1/dqRUhokXiXXtLkF7pr6QUrtwIwTETjIw=="
+  "resolved" "https://registry.npmjs.org/logrocket/-/logrocket-2.1.2.tgz"
+  "version" "2.1.2"
+
 "lower-case@^1.1.1":
   "integrity" "sha1-miyr0bno4K6ZOkv31YdcOcQujqw="
   "resolved" "https://registry.npmjs.org/lower-case/-/lower-case-1.1.4.tgz"
@@ -6656,6 +6661,11 @@
   dependencies:
     "de-indent" "^1.0.2"
     "he" "^1.1.0"
+
+"vue-web-storage@^6.1.0":
+  "integrity" "sha512-Qsa6QkUyGP+Tj0oxLRc6vEATv6axY89LbwfX8eaMM3i7K/Nl9m0NTELtNp0s8Xhg9F0SkeEP4NC3+LQL3ygMQw=="
+  "resolved" "https://registry.npmjs.org/vue-web-storage/-/vue-web-storage-6.1.0.tgz"
+  "version" "6.1.0"
 
 "vue@^3.0.0", "vue@^3.2.24", "vue@3.2.24":
   "integrity" "sha512-PvCklXNfcUMyeP/a9nME27C32IipwUDoS45rDyKn5+RQrWyjL+0JAJtf98HL6y9bfqQRTlYjSowWEB1nXxvG5Q=="
