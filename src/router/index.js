@@ -1,7 +1,8 @@
 import { route } from 'quasar/wrappers'
 import { createRouter, createMemoryHistory, createWebHistory, createWebHashHistory } from 'vue-router'
 import routes from './routes'
-
+import LogRocket from 'logrocket';
+LogRocket.init('0wdhaj/securezone');
 /*
  * If not building with SSR mode, you can
  * directly export the Router instantiation;
