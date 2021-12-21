@@ -69,27 +69,14 @@ html, body {
 <script>
 import { Loading, QSpinnerGears } from 'quasar'
 import {computed, inject, reactive} from 'vue'
+import axios from "axios";
 
 export default {
     name: 'login',
     setup() {
         const store = inject('store')
-
-        let loginForm = reactive({
-            email: '',
-            password: ''
-        })
-
-        let loginFormValid = computed(() => {
-            if (loginForm.email && loginForm.password) {
-                return true;
-            }
-        })
-
         return {
-            store,
-            loginForm,
-            loginFormValid
+            store
         }
     },
     data() {
@@ -100,31 +87,44 @@ export default {
     },
 
     methods: {
-        login() {
-            Loading.show({
-                spinner: QSpinnerGears,
-                // other props
-            })
+        async login() {
+        
 
-        },
-        LoginButtonClicked() {
-            
-            setTimeout(() => {
-                this.$q.dialog({
-                    title: 'Login Failed',
-                    message: "api.securezone.co.za timed out, please try again later"
+            const store = inject('store')
+            const params = {
+                query: `mutation {
+                    login(input: {
+                        username: "charl@isa.co.za",
+                        password: "1234"
+                    }) {
+                        access_token
+                        refresh_token
+                        expires_in
+                        token_type
+                        user {
+                            id
+                            email
+                            name
+                            created_at
+                            updated_at
+                        }
+                    }
+                }`
+            }
+            try {
+                await this.$api.post(params);
+
+                // This is an example script - don't forget to change it!
+                LogRocket.identify('2', {
+                name: 'Charl Cronje',
+                email: 'charl@isa.co.za',
+
+                // Add your own custom user variables here, ie:
+                subscriptionType: 'pro'
                 });
-                Loading.hide();
-            }, 30000);
+            } catch(error) {
 
-
-        }
-    },
-    actions: {
-        fetchUser({commit}, id) {
-            return axiosInstance.get(url, id).then(({data}) => {
-                commit('mutation', data)
-            })
+            }
         }
     }
 }
