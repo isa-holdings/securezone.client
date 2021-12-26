@@ -1,7 +1,10 @@
-import account from './modules/store-account'
+import {reactive} from 'vue';
+import Store from './types/Store';
+import Account from './types/Account';
 
-const store = {
-  account
+const store = reactive(new Store());
+new Account({test:"hello"});
+
+export default {
+    store
 }
-
-export default store;

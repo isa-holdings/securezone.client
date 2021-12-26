@@ -60,7 +60,7 @@ module.exports = {
     'one-var': 'off',
     'no-void': 'off',
     'multiline-ternary': 'off',
-
+    "indent": ["error", 4],
     'import/first': 'off',
     'import/named': 'error',
     'import/namespace': 'error',
@@ -70,7 +70,8 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/no-extraneous-dependencies': 'off',
     'prefer-promise-reject-errors': 'off',
-
+    'objecy-curly-spacing': 'off',
+    'no-extra-semi': off,
 
     // allow debugger during development only
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
